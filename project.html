@@ -96,18 +96,6 @@
       transform: scale(1.06);
       filter: brightness(0.75);
     }
-    /* Aperçu vidéo dans la card */
-    .project-thumb video.thumb-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s cubic-bezier(.22,1,.36,1), filter 0.3s;
-    }
-    .project-card:hover .project-thumb video.thumb-video {
-      transform: scale(1.06);
-      filter: brightness(0.75);
-    }
     .thumb-overlay {
       position: absolute;
       inset: 0;
@@ -142,13 +130,6 @@
       letter-spacing: 0.08em;
       padding: 0.2rem 0.5rem;
       border-radius: 0.35rem;
-      z-index: 2;
-    }
-    /* Badge vidéo couleur différente */
-    .pdf-badge.badge-video {
-      background: rgba(255, 80, 120, 0.18);
-      border-color: rgba(255, 80, 120, 0.35);
-      color: #ff5078;
     }
     .project-body {
       padding: 1.2rem 1.25rem 1.4rem;
@@ -198,8 +179,6 @@
       text-decoration: none;
     }
     .project-link:hover { text-decoration: underline; }
-
-    /* ── MODAL ── */
     .pdf-modal {
       position: fixed;
       inset: 0;
@@ -288,23 +267,6 @@
       background: #080c18;
     }
     .modal-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 0.5rem; }
-    /* Lecteur vidéo dans la modale */
-    .modal-video-wrap {
-      flex: 1;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000;
-      padding: 0;
-    }
-    .modal-video-wrap video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      outline: none;
-    }
     .thumb-placeholder {
       width: 100%;
       height: 100%;
@@ -436,7 +398,7 @@
     {
       title: "Affiche de cinéma — The Fall Guy",
       file: "projects/Affiche_cinema_The_Fall_Guy.pdf",
-      thumb: "thumbs/Affiche_cinema_The_Fall_Guy.jpg",
+      thumb: "projects/Affiche_cinema_The_Fall_Guy.jpg",
       type: "pdf",
       tags: ["Design", "Print", "Cinéma"],
       category: "design print",
@@ -446,7 +408,7 @@
     {
       title: "Présentation — Affiche Film",
       file: "projects/Presentation affiche film.pdf",
-      thumb: "thumbs/Presentation_affiche_film.jpg",
+      thumb: "images/thumbs/Presentation_affiche_film.jpg",
       type: "pdf",
       tags: ["Design", "Présentation", "Print"],
       category: "design print",
@@ -456,7 +418,7 @@
     {
       title: "Morpho — Charte Graphique",
       file: "projects/Morpho_charte_graphique.pdf",
-      thumb: "thumbs/Morpho_charte_graphique_.jpg",
+      thumb: "images/thumbs/Morpho_charte_graphique_.jpg",
       type: "pdf",
       tags: ["Branding", "Charte", "Identité"],
       category: "branding design",
@@ -466,7 +428,7 @@
     {
       title: "Charte Graphique",
       file: "projects/Charte graphique.pdf",
-      thumb: "thumbs/Charte_graphique.jpg",
+      thumb: "images/thumbs/Charte_graphique.jpg",
       type: "pdf",
       tags: ["Branding", "Charte", "Design"],
       category: "branding design",
@@ -476,7 +438,7 @@
     {
       title: "Logo Karu",
       file: "projects/Logo karu.png",
-      thumb: "thumbs/Logo_karu_thumb.jpg",
+      thumb: "images/thumbs/Logo_karu_thumb.jpg",
       type: "image",
       tags: ["Logo", "Branding", "Identité"],
       category: "branding design",
@@ -486,7 +448,7 @@
     {
       title: "Illustration BlackaPink",
       file: "projects/Illustration BlackaPink.png",
-      thumb: "thumbs/Illustration_BlackaPink_thumb.jpg",
+      thumb: "images/thumbs/Illustration_BlackaPink_thumb.jpg",
       type: "image",
       tags: ["Illustration", "Digital", "Art"],
       category: "illustration design",
@@ -527,61 +489,6 @@
       category: "design print",
       description: "Dossier de présentation du projet SAé KARUapp réalisé dans le cadre du BUT MMI. Détail de la démarche de projet, conception et réalisation.",
       year: "2026"
-    },
-    {
-      title: "Affiche JPO — L'Oasis des Héros",
-      file: "projects/Affiche JPO L'Oasis des Héros.png",
-      thumb: "thumbs/Affiche_JPO_Oasis_Heroes.jpg",
-      thumbPlaceholder: "🎨",
-      type: "image",
-      tags: ["Design", "Print", "Affiche"],
-      category: "design print",
-      description: "Création d'une affiche pour les Journées Portes Ouvertes de L'Oasis des Héros. Composition visuelle percutante alliant typographie et illustration.",
-      year: "2026"
-    },
-    {
-      title: "Brending — Orane Phedon",
-      file: "projects/Brending Orane Phedon.pdf",
-      thumb: null,
-      thumbPlaceholder: "✨",
-      type: "pdf",
-      tags: ["Branding", "Identité", "Design"],
-      category: "branding design",
-      description: "Conception de l'identité visuelle complète pour Orane Phedon : logotype, palette chromatique, typographies et déclinaisons de la marque.",
-      year: "2026"
-    },
-    {
-      title: "Moodboard — Recherches visuelles",
-      file: "projects/Moodboard.pdf",
-      thumb: null,
-      thumbPlaceholder: "🖼️",
-      type: "pdf",
-      tags: ["Design", "Moodboard", "Direction artistique"],
-      category: "design",
-      description: "Planche de tendances et de recherches visuelles servant de référence pour la direction artistique d'un projet créatif.",
-      year: "2026"
-    },
-    {
-      title: "IMPT — Reportage final",
-      file: "projects/IMPT reportage final.mp4",
-      thumb: null,
-      thumbPlaceholder: "🎬",
-      type: "video",
-      tags: ["Vidéo", "Reportage", "Audiovisuel"],
-      category: "video",
-      description: "Reportage audiovisuel final réalisé dans le cadre du projet IMPT. Tournage, montage et habillage sonore.",
-      year: "2026"
-    },
-    {
-      title: "Vidéo finale",
-      file: "projects/video final.mp4",
-      thumb: null,
-      thumbPlaceholder: "🎥",
-      type: "video",
-      tags: ["Vidéo", "Motion", "Audiovisuel"],
-      category: "video",
-      description: "Production vidéo finale : direction artistique, réalisation et post-production complète.",
-      year: "2026"
     }
   ];
 
@@ -593,7 +500,6 @@
     { key: "print",        label: "Print" },
     { key: "illustration", label: "Illustration" },
     { key: "uiux",         label: "UI/UX" },
-    { key: "video",        label: "Vidéo" },
   ];
 
   const filtersWrapper = document.getElementById('filters-wrapper');
@@ -605,17 +511,24 @@
     filtersWrapper.appendChild(btn);
   });
 
-  const grid      = document.getElementById('projects-grid');
-  const countEl   = document.getElementById('count');
-  const noResults = document.getElementById('no-results');
+  const grid       = document.getElementById('projects-grid');
+  const countEl    = document.getElementById('count');
+  const noResults  = document.getElementById('no-results');
 
+  /* ─────────────────────────────────────────
+     ✅ FIX : création de la miniature via JS
+     au lieu d'un onerror inline (qui cassait
+     les guillemets et bloquait le fallback)
+  ───────────────────────────────────────── */
   function buildThumb(proj, thumbDiv) {
     if (proj.thumb) {
       const img = document.createElement('img');
       img.alt     = proj.title;
       img.loading = 'lazy';
+      img.src     = proj.thumb; // assigné après l'événement pour s'assurer que onerror est attaché
 
       img.addEventListener('error', function () {
+        // Image introuvable → on affiche le placeholder à la place
         thumbDiv.innerHTML = '';
         const ph = document.createElement('div');
         ph.className = 'thumb-placeholder';
@@ -625,27 +538,9 @@
         thumbDiv.insertBefore(ph, thumbDiv.firstChild);
       });
 
-      img.src = proj.thumb;
       thumbDiv.insertBefore(img, thumbDiv.firstChild);
-
-    } else if (proj.type === 'video' && proj.file) {
-      // Aperçu vidéo silencieux en boucle dans la card
-      const vid = document.createElement('video');
-      vid.className  = 'thumb-video';
-      vid.src        = proj.file;
-      vid.muted      = true;
-      vid.loop       = true;
-      vid.preload    = 'metadata';
-      vid.playsInline = true;
-
-      // Play/pause au survol de la card
-      const card = thumbDiv.closest('.project-card') || thumbDiv.parentElement;
-      card.addEventListener('mouseenter', () => vid.play().catch(() => {}));
-      card.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
-
-      thumbDiv.insertBefore(vid, thumbDiv.firstChild);
-
     } else {
+      // Pas de chemin d'image → placeholder direct
       const ph = document.createElement('div');
       ph.className = 'thumb-placeholder';
       ph.innerHTML =
@@ -659,25 +554,23 @@
     grid.innerHTML = '';
     projects.forEach((proj) => {
       const card = document.createElement('div');
-      card.className         = 'project-card';
-      card.dataset.category  = proj.category;
+      card.className    = 'project-card';
+      card.dataset.category = proj.category;
 
       const tagsHtml = proj.tags.map(t => '<span class="project-tag">' + t + '</span>').join('');
+      const badgeLabel = proj.type === 'pdf' ? 'PDF' : proj.type === 'web' ? 'WEB' : 'IMG';
+      const overlayText = proj.type === 'web' ? 'Visiter →' : 'Ouvrir →';
 
-      let badgeLabel, badgeClass, overlayText;
-      if (proj.type === 'pdf')        { badgeLabel = 'PDF';   badgeClass = '';            overlayText = 'Ouvrir →'; }
-      else if (proj.type === 'web')   { badgeLabel = 'WEB';   badgeClass = '';            overlayText = 'Visiter →'; }
-      else if (proj.type === 'video') { badgeLabel = '▶ MP4'; badgeClass = 'badge-video'; overlayText = '▶ Regarder'; }
-      else                            { badgeLabel = 'IMG';   badgeClass = '';            overlayText = 'Ouvrir →'; }
-
+      // Thumb div — image injectée séparément via buildThumb()
       const thumbDiv = document.createElement('div');
       thumbDiv.className = 'project-thumb';
       thumbDiv.innerHTML =
-        '<span class="pdf-badge ' + badgeClass + '">' + badgeLabel + '</span>' +
+        '<span class="pdf-badge">' + badgeLabel + '</span>' +
         '<div class="thumb-overlay"><div class="thumb-overlay-btn">' + overlayText + '</div></div>';
 
-      buildThumb(proj, thumbDiv);
+      buildThumb(proj, thumbDiv); // ← injection propre sans onerror inline
 
+      // Body
       const body = document.createElement('div');
       body.className = 'project-body';
       body.innerHTML =
@@ -727,23 +620,21 @@
     noResults.style.display = filtered.length === 0 ? 'block' : 'none';
   });
 
-  /* ── MODAL ── */
-  const modal            = document.getElementById('pdf-modal');
-  const modalTitle       = document.getElementById('modal-title');
-  const modalDownload    = document.getElementById('modal-download');
+  const modal           = document.getElementById('pdf-modal');
+  const modalTitle      = document.getElementById('modal-title');
+  const modalDownload   = document.getElementById('modal-download');
   const modalContentArea = document.getElementById('modal-content-area');
-  const modalClose       = document.getElementById('modal-close');
-  const modalBackdrop    = document.getElementById('modal-backdrop');
+  const modalClose      = document.getElementById('modal-close');
+  const modalBackdrop   = document.getElementById('modal-backdrop');
 
   function openModal(proj) {
     if (proj.type === 'web') {
       window.open(proj.liveUrl, '_blank', 'noopener,noreferrer');
       return;
     }
-
-    modalTitle.textContent = proj.title;
-    modalDownload.href     = proj.file || '#';
-    modalDownload.download = proj.file ? proj.file.split('/').pop() : '';
+    modalTitle.textContent  = proj.title;
+    modalDownload.href      = proj.file || '#';
+    modalDownload.download  = proj.file ? proj.file.split('/').pop() : '';
     modalContentArea.innerHTML = '';
 
     if (proj.type === 'pdf') {
@@ -753,17 +644,6 @@
       iframe.title = proj.title;
       iframe.setAttribute('allowfullscreen', '');
       modalContentArea.appendChild(iframe);
-
-    } else if (proj.type === 'video') {
-      modalContentArea.className = 'modal-video-wrap';
-      const video = document.createElement('video');
-      video.src      = proj.file;
-      video.controls = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.style.maxHeight = '100%';
-      modalContentArea.appendChild(video);
-
     } else {
       modalContentArea.className = 'modal-img-wrap';
       const img = document.createElement('img');
@@ -779,9 +659,6 @@
   function closeModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
-    // Stopper la vidéo avant de détruire le DOM
-    const vid = modalContentArea.querySelector('video');
-    if (vid) { vid.pause(); vid.src = ''; }
     setTimeout(() => { modalContentArea.innerHTML = ''; }, 400);
   }
 
