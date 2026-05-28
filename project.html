@@ -7,7 +7,6 @@
   <meta name="description" content="Découvrez les projets de design graphique et développement web de Lévy CINQ-VAL.">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ─── PROJECTS DYNAMIC STYLES ─── */
     .filters-section {
       padding: 2rem 1rem 0;
       display: flex;
@@ -46,8 +45,6 @@
       margin-bottom: 2rem;
     }
     .projects-count span { color: var(--primary); font-weight: 600; }
-
-    /* ── Grid ── */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -58,8 +55,6 @@
     @media (min-width: 900px) {
       .projects-grid { grid-template-columns: repeat(3, 1fr); }
     }
-
-    /* ── Card ── */
     .project-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -76,16 +71,12 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .project-card[data-hidden="true"] {
-      display: none;
-    }
+    .project-card[data-hidden="true"] { display: none; }
     .project-card:hover {
       transform: translateY(-6px) scale(1.01);
       box-shadow: 0 16px 48px rgba(0,217,255,0.12);
       border-color: rgba(0,217,255,0.35);
     }
-
-    /* ── Thumbnail ── */
     .project-thumb {
       position: relative;
       width: 100%;
@@ -127,8 +118,6 @@
       transition: transform 0.3s cubic-bezier(.22,1,.36,1);
     }
     .project-card:hover .thumb-overlay-btn { transform: translateY(0); }
-
-    /* PDF badge */
     .pdf-badge {
       position: absolute;
       top: 0.6rem;
@@ -142,8 +131,6 @@
       padding: 0.2rem 0.5rem;
       border-radius: 0.35rem;
     }
-
-    /* ── Body ── */
     .project-body {
       padding: 1.2rem 1.25rem 1.4rem;
       display: flex;
@@ -190,11 +177,8 @@
       font-weight: 600;
       color: var(--primary);
       text-decoration: none;
-      transition: gap 0.2s;
     }
     .project-link:hover { text-decoration: underline; }
-
-    /* ── Modal PDF Viewer ── */
     .pdf-modal {
       position: fixed;
       inset: 0;
@@ -206,10 +190,7 @@
       pointer-events: none;
       transition: opacity 0.35s ease;
     }
-    .pdf-modal.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .pdf-modal.open { opacity: 1; pointer-events: all; }
     .modal-backdrop {
       position: absolute;
       inset: 0;
@@ -232,9 +213,7 @@
       transition: transform 0.4s cubic-bezier(.22,1,.36,1);
       box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,217,255,0.08);
     }
-    .pdf-modal.open .modal-box {
-      transform: scale(1) translateY(0);
-    }
+    .pdf-modal.open .modal-box { transform: scale(1) translateY(0); }
     .modal-header {
       display: flex;
       align-items: center;
@@ -277,13 +256,7 @@
     }
     .modal-btn.close-btn:hover { background: rgba(239,68,68,0.2); }
     .modal-iframe-wrap { flex: 1; overflow: hidden; }
-    .modal-iframe-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-    /* Image viewer inside modal */
+    .modal-iframe-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
     .modal-img-wrap {
       flex: 1;
       overflow: auto;
@@ -293,14 +266,7 @@
       padding: 1rem;
       background: #080c18;
     }
-    .modal-img-wrap img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 0.5rem;
-    }
-
-    /* ── Loading state ── */
+    .modal-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 0.5rem; }
     .thumb-placeholder {
       width: 100%;
       height: 100%;
@@ -313,8 +279,6 @@
     }
     .thumb-placeholder-icon { font-size: 2.5rem; opacity: 0.6; }
     .thumb-placeholder-label { font-size: 0.7rem; color: var(--muted-foreground); letter-spacing: 0.05em; }
-
-    /* ── No results ── */
     #no-results {
       text-align: center;
       color: var(--muted-foreground);
@@ -322,26 +286,14 @@
       display: none;
       font-size: 1rem;
     }
-
-    /* ── CTA section ── */
     .projects-cta {
       padding: 5rem 1rem;
       text-align: center;
       background: rgba(15,20,32,0.3);
     }
     .cta-inner { max-width: 600px; margin: 0 auto; }
-    .cta-inner h2 {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    .cta-inner p {
-      color: var(--muted-foreground);
-      margin-bottom: 2rem;
-      line-height: 1.7;
-    }
-
-    /* ── Stagger animation delays ── */
+    .cta-inner h2 { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+    .cta-inner p { color: var(--muted-foreground); margin-bottom: 2rem; line-height: 1.7; }
     .project-card:nth-child(1) { transition-delay: 0.05s; }
     .project-card:nth-child(2) { transition-delay: 0.1s; }
     .project-card:nth-child(3) { transition-delay: 0.15s; }
@@ -352,7 +304,6 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header id="header" class="header slide-down">
     <div class="container">
       <div class="header-content">
@@ -374,7 +325,6 @@
     </div>
   </header>
 
-  <!-- Hero -->
   <section class="projects-hero">
     <div class="container">
       <div class="projects-hero-label fade-in-delay-1">🌊 Mes réalisations</div>
@@ -386,27 +336,20 @@
     </div>
   </section>
 
-  <!-- Filtres -->
   <section class="filters-section">
-    <div class="filters-wrapper reveal" id="filters-wrapper">
-      <!-- Généré dynamiquement -->
-    </div>
+    <div class="filters-wrapper reveal" id="filters-wrapper"></div>
   </section>
 
-  <!-- Grille Projets -->
   <section class="projects-section">
     <div class="container">
       <p class="projects-count reveal">
         <span id="count">0</span> projet(s) affiché(s)
       </p>
-      <div class="projects-grid" id="projects-grid">
-        <!-- Généré dynamiquement par JS -->
-      </div>
+      <div class="projects-grid" id="projects-grid"></div>
       <p id="no-results">Aucun projet dans cette catégorie pour l'instant.</p>
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="projects-cta">
     <div class="cta-inner scale-in">
       <h2>⟡ Un projet en tête ? ⟡</h2>
@@ -418,26 +361,20 @@
     </div>
   </section>
 
-  <!-- Modal PDF/Image Viewer -->
   <div class="pdf-modal" id="pdf-modal" role="dialog" aria-modal="true">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     <div class="modal-box">
       <div class="modal-header">
         <span class="modal-title" id="modal-title">Chargement…</span>
         <div class="modal-actions">
-          <a href="#" class="modal-btn" id="modal-download" download target="_blank">
-            ↓ Télécharger
-          </a>
+          <a href="#" class="modal-btn" id="modal-download" download target="_blank">↓ Télécharger</a>
           <button class="modal-btn close-btn" id="modal-close">✕ Fermer</button>
         </div>
       </div>
-      <div id="modal-content-area">
-        <!-- iframe or img injected here -->
-      </div>
+      <div id="modal-content-area"></div>
     </div>
   </div>
 
-  <!-- Widget d'Accessibilité -->
   <div id="accessibility-widget" class="accessibility-widget">
     <button id="accessibility-toggle" class="accessibility-toggle" aria-label="Accessibilité" title="Options d'accessibilité">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -447,30 +384,16 @@
     </button>
     <div id="accessibility-panel" class="accessibility-panel hidden">
       <h3 class="panel-title">Accessibilité</h3>
-      <button class="accessibility-option" onclick="toggleTheme()">
-        <span>🌓 Thème</span><span id="theme-label">Sombre</span>
-      </button>
-      <button class="accessibility-option" onclick="cycleFontSize()">
-        <span>🔤 Taille du texte</span><span id="font-size-label">Normal</span>
-      </button>
-      <button class="accessibility-option" onclick="toggleContrast()">
-        <span>⚡ Contraste élevé</span><span id="contrast-label">Désactivé</span>
-      </button>
-      <button class="accessibility-option" onclick="toggleLanguage()">
-        <span>🌍 Langue</span><span id="language-label">Français</span>
-      </button>
+      <button class="accessibility-option" onclick="toggleTheme()"><span>🌓 Thème</span><span id="theme-label">Sombre</span></button>
+      <button class="accessibility-option" onclick="cycleFontSize()"><span>🔤 Taille du texte</span><span id="font-size-label">Normal</span></button>
+      <button class="accessibility-option" onclick="toggleContrast()"><span>⚡ Contraste élevé</span><span id="contrast-label">Désactivé</span></button>
+      <button class="accessibility-option" onclick="toggleLanguage()"><span>🌍 Langue</span><span id="language-label">Français</span></button>
     </div>
   </div>
 
   <button id="scroll-top-btn" aria-label="Retour en haut">↑</button>
   <script src="script.js"></script>
   <script>
-  /* ═══════════════════════════════════════════════════════════════
-     DYNAMIC PROJECTS SYSTEM
-     Pour ajouter un projet : ajouter une entrée dans PROJECTS_DATA
-     et placer le fichier dans /projects/
-  ═══════════════════════════════════════════════════════════════ */
-
   const PROJECTS_DATA = [
     {
       title: "Affiche de cinéma — The Fall Guy",
@@ -569,7 +492,6 @@
     }
   ];
 
-  /* ── Catégories disponibles ── */
   const CATEGORIES = [
     { key: "all",          label: "Tous les projets" },
     { key: "web",          label: "Sites web" },
@@ -580,7 +502,6 @@
     { key: "uiux",         label: "UI/UX" },
   ];
 
-  /* ── Build filter buttons ── */
   const filtersWrapper = document.getElementById('filters-wrapper');
   CATEGORIES.forEach(cat => {
     const btn = document.createElement('button');
@@ -590,63 +511,91 @@
     filtersWrapper.appendChild(btn);
   });
 
-  /* ── Build project cards ── */
-  const grid = document.getElementById('projects-grid');
-  const countEl = document.getElementById('count');
-  const noResults = document.getElementById('no-results');
+  const grid       = document.getElementById('projects-grid');
+  const countEl    = document.getElementById('count');
+  const noResults  = document.getElementById('no-results');
+
+  /* ─────────────────────────────────────────
+     ✅ FIX : création de la miniature via JS
+     au lieu d'un onerror inline (qui cassait
+     les guillemets et bloquait le fallback)
+  ───────────────────────────────────────── */
+  function buildThumb(proj, thumbDiv) {
+    if (proj.thumb) {
+      const img = document.createElement('img');
+      img.alt     = proj.title;
+      img.loading = 'lazy';
+      img.src     = proj.thumb; // assigné après l'événement pour s'assurer que onerror est attaché
+
+      img.addEventListener('error', function () {
+        // Image introuvable → on affiche le placeholder à la place
+        thumbDiv.innerHTML = '';
+        const ph = document.createElement('div');
+        ph.className = 'thumb-placeholder';
+        ph.innerHTML =
+          '<div class="thumb-placeholder-icon">' + (proj.thumbPlaceholder || '📄') + '</div>' +
+          '<div class="thumb-placeholder-label">' + proj.type.toUpperCase() + '</div>';
+        thumbDiv.insertBefore(ph, thumbDiv.firstChild);
+      });
+
+      thumbDiv.insertBefore(img, thumbDiv.firstChild);
+    } else {
+      // Pas de chemin d'image → placeholder direct
+      const ph = document.createElement('div');
+      ph.className = 'thumb-placeholder';
+      ph.innerHTML =
+        '<div class="thumb-placeholder-icon">' + (proj.thumbPlaceholder || '📄') + '</div>' +
+        '<div class="thumb-placeholder-label">' + proj.type.toUpperCase() + '</div>';
+      thumbDiv.insertBefore(ph, thumbDiv.firstChild);
+    }
+  }
 
   function buildCards(projects) {
     grid.innerHTML = '';
-    projects.forEach((proj, i) => {
+    projects.forEach((proj) => {
       const card = document.createElement('div');
-      card.className = 'project-card';
+      card.className    = 'project-card';
       card.dataset.category = proj.category;
-      card.dataset.file = proj.file;
-      card.dataset.type = proj.type;
-      card.dataset.title = proj.title;
 
-      const tagsHtml = proj.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
-
+      const tagsHtml = proj.tags.map(t => '<span class="project-tag">' + t + '</span>').join('');
       const badgeLabel = proj.type === 'pdf' ? 'PDF' : proj.type === 'web' ? 'WEB' : 'IMG';
-      const thumbContent = proj.thumb
-        ? `<img src="${proj.thumb}" alt="${proj.title}" loading="lazy"
-               onerror="this.parentElement.innerHTML='<div class=\\'thumb-placeholder\\'><div class=\\'thumb-placeholder-icon\\'>${proj.thumbPlaceholder || '📄'}</div><div class=\\'thumb-placeholder-label\\'>${proj.type.toUpperCase()}</div></div>'">`
-        : `<div class="thumb-placeholder"><div class="thumb-placeholder-icon">${proj.thumbPlaceholder || '📄'}</div><div class="thumb-placeholder-label">${proj.type.toUpperCase()}</div></div>`;
+      const overlayText = proj.type === 'web' ? 'Visiter →' : 'Ouvrir →';
 
-      card.innerHTML = `
-        <div class="project-thumb">
-          ${thumbContent}
-          <span class="pdf-badge">${badgeLabel}</span>
-          <div class="thumb-overlay">
-            <div class="thumb-overlay-btn">${proj.type === 'web' ? 'Visiter →' : 'Ouvrir →'}</div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">${tagsHtml}</div>
-          <h2 class="project-title">${proj.title}</h2>
-          <p class="project-description">${proj.description}</p>
-          <div class="project-footer">
-            <span class="project-year">${proj.year}</span>
-            <span class="project-link">Voir le projet →</span>
-          </div>
-        </div>
-      `;
+      // Thumb div — image injectée séparément via buildThumb()
+      const thumbDiv = document.createElement('div');
+      thumbDiv.className = 'project-thumb';
+      thumbDiv.innerHTML =
+        '<span class="pdf-badge">' + badgeLabel + '</span>' +
+        '<div class="thumb-overlay"><div class="thumb-overlay-btn">' + overlayText + '</div></div>';
 
+      buildThumb(proj, thumbDiv); // ← injection propre sans onerror inline
+
+      // Body
+      const body = document.createElement('div');
+      body.className = 'project-body';
+      body.innerHTML =
+        '<div class="project-tags">' + tagsHtml + '</div>' +
+        '<h2 class="project-title">' + proj.title + '</h2>' +
+        '<p class="project-description">' + proj.description + '</p>' +
+        '<div class="project-footer">' +
+          '<span class="project-year">' + proj.year + '</span>' +
+          '<span class="project-link">Voir le projet →</span>' +
+        '</div>';
+
+      card.appendChild(thumbDiv);
+      card.appendChild(body);
       card.addEventListener('click', () => openModal(proj));
       grid.appendChild(card);
     });
 
     countEl.textContent = projects.length;
 
-    // Scroll reveal with stagger
     requestAnimationFrame(() => {
       const cards = grid.querySelectorAll('.project-card');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, idx) => {
           if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, idx * 60);
+            setTimeout(() => entry.target.classList.add('visible'), idx * 60);
             observer.unobserve(entry.target);
           }
         });
@@ -657,57 +606,45 @@
 
   buildCards(PROJECTS_DATA);
 
-  /* ── Filter logic ── */
   let activeFilter = 'all';
-
   filtersWrapper.addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
     activeFilter = btn.dataset.filter;
-
     filtersWrapper.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     const filtered = activeFilter === 'all'
       ? PROJECTS_DATA
       : PROJECTS_DATA.filter(p => p.category.includes(activeFilter));
-
     buildCards(filtered);
     noResults.style.display = filtered.length === 0 ? 'block' : 'none';
   });
 
-  /* ─────────────────────────────────────────
-     MODAL PDF / IMAGE VIEWER
-  ───────────────────────────────────────── */
-  const modal = document.getElementById('pdf-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalDownload = document.getElementById('modal-download');
+  const modal           = document.getElementById('pdf-modal');
+  const modalTitle      = document.getElementById('modal-title');
+  const modalDownload   = document.getElementById('modal-download');
   const modalContentArea = document.getElementById('modal-content-area');
-  const modalClose = document.getElementById('modal-close');
-  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalClose      = document.getElementById('modal-close');
+  const modalBackdrop   = document.getElementById('modal-backdrop');
 
   function openModal(proj) {
-    // Projets web → ouvrir directement dans un nouvel onglet
     if (proj.type === 'web') {
       window.open(proj.liveUrl, '_blank', 'noopener,noreferrer');
       return;
     }
-
-    modalTitle.textContent = proj.title;
-    modalDownload.href = proj.file || '#';
-    modalDownload.download = proj.file ? proj.file.split('/').pop() : '';
-
+    modalTitle.textContent  = proj.title;
+    modalDownload.href      = proj.file || '#';
+    modalDownload.download  = proj.file ? proj.file.split('/').pop() : '';
     modalContentArea.innerHTML = '';
 
     if (proj.type === 'pdf') {
       modalContentArea.className = 'modal-iframe-wrap';
       const iframe = document.createElement('iframe');
-      iframe.src = proj.file + '#toolbar=1&navpanes=0&scrollbar=1';
+      iframe.src   = proj.file + '#toolbar=1&navpanes=0&scrollbar=1';
       iframe.title = proj.title;
       iframe.setAttribute('allowfullscreen', '');
       modalContentArea.appendChild(iframe);
     } else {
-      // Image viewer
       modalContentArea.className = 'modal-img-wrap';
       const img = document.createElement('img');
       img.src = proj.file;
