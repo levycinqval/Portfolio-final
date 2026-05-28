@@ -607,13 +607,18 @@
 
       const tagsHtml = proj.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
 
+      const badgeLabel = proj.type === 'pdf' ? 'PDF' : proj.type === 'web' ? 'WEB' : 'IMG';
+      const thumbContent = proj.thumb
+        ? `<img src="${proj.thumb}" alt="${proj.title}" loading="lazy"
+               onerror="this.parentElement.innerHTML='<div class=\\'thumb-placeholder\\'><div class=\\'thumb-placeholder-icon\\'>${proj.thumbPlaceholder || '📄'}</div><div class=\\'thumb-placeholder-label\\'>${proj.type.toUpperCase()}</div></div>'">`
+        : `<div class="thumb-placeholder"><div class="thumb-placeholder-icon">${proj.thumbPlaceholder || '📄'}</div><div class="thumb-placeholder-label">${proj.type.toUpperCase()}</div></div>`;
+
       card.innerHTML = `
         <div class="project-thumb">
-          <img src="${proj.thumb}" alt="${proj.title}" loading="lazy"
-               onerror="this.parentElement.innerHTML='<div class=\\'thumb-placeholder\\'><div class=\\'thumb-placeholder-icon\\'>📄</div><div class=\\'thumb-placeholder-label\\'>${proj.type.toUpperCase()}</div></div>'">
-          <span class="pdf-badge">${proj.type === 'pdf' ? 'PDF' : 'IMG'}</span>
+          ${thumbContent}
+          <span class="pdf-badge">${badgeLabel}</span>
           <div class="thumb-overlay">
-            <div class="thumb-overlay-btn">Ouvrir →</div>
+            <div class="thumb-overlay-btn">${proj.type === 'web' ? 'Visiter →' : 'Ouvrir →'}</div>
           </div>
         </div>
         <div class="project-body">
@@ -682,9 +687,15 @@
   const modalBackdrop = document.getElementById('modal-backdrop');
 
   function openModal(proj) {
+    // Projets web → ouvrir directement dans un nouvel onglet
+    if (proj.type === 'web') {
+      window.open(proj.liveUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
     modalTitle.textContent = proj.title;
-    modalDownload.href = proj.file;
-    modalDownload.download = proj.file.split('/').pop();
+    modalDownload.href = proj.file || '#';
+    modalDownload.download = proj.file ? proj.file.split('/').pop() : '';
 
     modalContentArea.innerHTML = '';
 
