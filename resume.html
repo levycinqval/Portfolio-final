@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Lévy CINQ-VAL</title>
+  <meta name="description" content="Téléchargez le CV de Lévy CINQ-VAL — Design graphique, Développement web, BUT MMI.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Page CV ── */
+    .resume-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 1.5rem 4rem;
+    }
+
+    /* Fond animé cohérent avec le reste du portfolio */
+    .resume-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(59,130,246,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 60%, rgba(6,182,212,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Vagues décoratives en arrière-plan */
+    .resume-waves {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .resume-container {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Badge disponibilité */
+    .resume-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 2rem;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.82rem;
+      color: var(--primary, #60a5fa);
+      letter-spacing: 0.04em;
+      margin-bottom: 2.2rem;
+      animation: fadeInDown 0.6s ease both;
+    }
+
+    .resume-badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22d3ee;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* Titre principal */
+    .resume-title {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      animation: fadeInUp 0.7s 0.1s ease both;
+    }
+
+    .resume-title span {
+      background: linear-gradient(135deg, #60a5fa 0%, #22d3ee 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .resume-subtitle {
+      font-size: 1.1rem;
+      color: var(--muted-foreground, #94a3b8);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      animation: fadeInUp 0.7s 0.2s ease both;
+    }
+
+    /* Carte info CV */
+    .resume-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+      animation: fadeInUp 0.7s 0.3s ease both;
+      text-align: left;
+    }
+
+    .resume-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .resume-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(6,182,212,0.2));
+      border: 1px solid rgba(59,130,246,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .resume-card-meta h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .resume-card-meta p {
+      font-size: 0.82rem;
+      color: var(--muted-foreground, #94a3b8);
+    }
+
+    /* Liste des compétences / infos */
+    .resume-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 520px) {
+      .resume-info-grid { grid-template-columns: 1fr; }
+    }
+
+    .resume-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .resume-info-item .info-emoji {
+      font-size: 1.1rem;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    .resume-info-item .info-label {
+      font-size: 0.75rem;
+      color: var(--muted-foreground, #94a3b8);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+    }
+
+    .resume-info-item .info-value {
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    /* Bouton téléchargement principal */
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 1.1rem 2.6rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      box-shadow: 0 8px 32px rgba(59,130,246,0.35), 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      animation: fadeInUp 0.7s 0.4s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-download::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+      border-radius: inherit;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 16px 48px rgba(59,130,246,0.45), 0 4px 12px rgba(0,0,0,0.25);
+      filter: brightness(1.1);
+    }
+
+    .btn-download:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-download svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Bouton secondaire - contact */
+    .btn-contact-alt {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--muted-foreground, #94a3b8);
+      font-size: 0.92rem;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      animation: fadeInUp 0.7s 0.5s ease both;
+      margin-top: 0.5rem;
+    }
+
+    .btn-contact-alt:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Zone CTA boutons */
+    .resume-cta-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* Note sous le bouton */
+    .resume-note {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.82rem;
+      color: var(--muted-foreground, #94a3b8);
+      animation: fadeInUp 0.7s 0.6s ease both;
+    }
+
+    .resume-note a {
+      color: var(--primary, #60a5fa);
+      text-decoration: none;
+    }
+
+    .resume-note a:hover { text-decoration: underline; }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header" class="header slide-down">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo-link">
+          <img src="images/Logo.png" alt="Logo" class="logo">
+          <span class="logo-text">Lévy CINQ-VAL</span>
+        </a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav">
+          <a href="index.html" class="nav-link">Accueil</a>
+          <a href="about.html" class="nav-link">À propos</a>
+          <a href="project.html" class="nav-link">Projets</a>
+          <a href="resume.html" class="nav-link active">CV</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero CV -->
+  <section class="resume-hero">
+
+    <!-- Vagues décoratives -->
+    <svg class="resume-waves" viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,90 C240,150 480,30 720,90 C960,150 1200,30 1440,90 L1440,180 L0,180 Z" fill="rgba(59,130,246,0.06)"/>
+      <path d="M0,120 C360,60 1080,180 1440,120 L1440,180 L0,180 Z" fill="rgba(6,182,212,0.04)"/>
+    </svg>
+
+    <div class="resume-container">
+
+      <!-- Badge -->
+      <div class="resume-badge">
+        <span class="dot"></span>
+        ⚓ Disponible pour de nouveaux projets
+      </div>
+
+      <!-- Titre -->
+      <h1 class="resume-title">
+        Mon <span>CV</span>
+      </h1>
+      <p class="resume-subtitle">
+        Designer graphique &amp; développeur web passionné, formé en BUT MMI.
+        Retrouvez ici l'ensemble de mon parcours, mes compétences et mes expériences.
+      </p>
+
+      <!-- Carte récapitulative -->
+      <div class="resume-card">
+        <div class="resume-card-header">
+          <div class="resume-card-icon">📄</div>
+          <div class="resume-card-meta">
+            <h3>CV — Lévy CINQ-VAL</h3>
+            <p>Mis à jour en 2025 · Format PDF</p>
+          </div>
+        </div>
+
+        <div class="resume-info-grid">
+          <div class="resume-info-item">
+            <span class="info-emoji">🎓</span>
+            <div>
+              <p class="info-label">Formation</p>
+              <p class="info-value">BUT MMI</p>
+            </div>
+          </div>
+          <div class="resume-info-item">
+            <span class="info-emoji">🌊</span>
+            <div>
+              <p class="info-label">Localisation</p>
+              <p class="info-value">Guadeloupe · Remote</p>
+            </div>
+          </div>
+          <div class="resume-info-item">
+            <span class="info-emoji">🎨</span>
+            <div>
+              <p class="info-label">Spécialités</p>
+              <p class="info-value">Design · Web · UI/UX</p>
+            </div>
+          </div>
+          <div class="resume-info-item">
+            <span class="info-emoji">🚀</span>
+            <div>
+              <p class="info-label">Disponibilité</p>
+              <p class="info-value">Immédiate</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boutons CTA -->
+      <div class="resume-cta-buttons">
+        <!-- Bouton visualiser -->
+        <a href="CV_Levy_CINQ-VAL.pdf" target="_blank" rel="noopener" class="btn-download" style="background:transparent;border:2px solid;border-image:linear-gradient(135deg,#3b82f6,#06b6d4) 1;color:#60a5fa;box-shadow:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          Voir mon CV
+        </a>
+        <!-- Bouton télécharger -->
+        <a href="CV_Levy_CINQ-VAL.pdf" download class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 15V3M12 15l-4-4M12 15l4-4"/>
+            <path d="M2 17v2a2 2 0 002 2h16a2 2 0 002-2v-2"/>
+          </svg>
+          Télécharger mon CV
+        </a>
+
+        <a href="contact.html" class="btn-contact-alt">
+          📧 Me contacter directement
+        </a>
+      </div>
+
+      <!-- Note de bas de page -->
+      <p class="resume-note">
+        Vous pouvez aussi me retrouver sur
+        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+        ou consulter mes
+        <a href="project.html">projets</a> pour voir mon travail en détail.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Widget d'Accessibilité -->
+  <div id="accessibility-widget" class="accessibility-widget">
+    <button id="accessibility-toggle" class="accessibility-toggle" aria-label="Accessibilité" title="Options d'accessibilité">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
+        <path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/>
+      </svg>
+    </button>
+    <div id="accessibility-panel" class="accessibility-panel hidden">
+      <h3 class="panel-title">Accessibilité</h3>
+      <button class="accessibility-option" onclick="toggleTheme()">
+        <span>🌓 Thème</span><span id="theme-label">Sombre</span>
+      </button>
+      <button class="accessibility-option" onclick="cycleFontSize()">
+        <span>🔤 Taille du texte</span><span id="font-size-label">Normal</span>
+      </button>
+      <button class="accessibility-option" onclick="toggleContrast()">
+        <span>⚡ Contraste élevé</span><span id="contrast-label">Désactivé</span>
+      </button>
+      <button class="accessibility-option" onclick="toggleLanguage()">
+        <span>🌍 Langue</span><span id="language-label">Français</span>
+      </button>
+    </div>
+  </div>
+
+  <button id="scroll-top-btn" aria-label="Retour en haut">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

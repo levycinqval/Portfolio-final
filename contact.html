@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Lévy CINQ-VAL</title>
+  <meta name="description" content="Contactez Lévy CINQ-VAL pour vos projets de design graphique et développement web.">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- EmailJS SDK -->
+  <!-- ⚠️ Pour activer l'envoi réel : créez un compte sur emailjs.com,
+       créez un service (Gmail), un template, puis remplacez les IDs dans script.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // Remplacez 'YOUR_PUBLIC_KEY' par votre clé publique EmailJS
+    (function() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init('bvGMHHB0wKgsr5l0D');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header" class="header slide-down">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo-link">
+          <img src="images/Logo.png" alt="Logo" class="logo">
+          <span class="logo-text">Lévy CINQ-VAL</span>
+        </a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav">
+          <a href="index.html"   class="nav-link">Accueil</a>
+          <a href="about.html"   class="nav-link">À propos</a>
+          <a href="project.html" class="nav-link">Projets</a>
+          <a href="resume.html"  class="nav-link">CV</a>
+          <a href="contact.html" class="nav-link active">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="contact-hero">
+    <div class="container">
+      <div class="fade-in">
+        <div class="contact-hero-label fade-in-delay-1">⚓ Prêt à embarquer</div>
+        <h1 class="fade-in-delay-2">Travaillons <span>ensemble</span></h1>
+        <p class="fade-in-delay-3">
+          Un projet, une idée, une collaboration ?<br>
+          Je suis à votre écoute — chaque grande aventure commence par un message.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vague décorative -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="rgba(15,20,32,0.3)"/>
+    </svg>
+  </div>
+
+  <!-- Section contact -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Infos -->
+        <div class="contact-info reveal">
+
+          <div class="availability-badge">
+            <div class="dot-live"></div>
+            <p>Disponible pour de nouveaux projets
+              <span>Réponse sous 24h en général</span>
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">📧</div>
+            <div class="info-content">
+              <h3>Email</h3>
+              <a href="mailto:levynetwork05@gmail.com">levynetwork05@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🌊</div>
+            <div class="info-content">
+              <h3>Localisation</h3>
+              <p>Guadeloupe, France · Remote disponible</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🔗</div>
+            <div class="info-content">
+              <h3>Réseaux sociaux</h3>
+              <div class="social-row">
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="social-chip">💼 LinkedIn</a>
+                <a href="https://www.instagram.com/levy_drawn?utm_source=qr&igsh=N2xmbmc2c2drcTV4" target="_blank" rel="noopener" class="social-chip">📸 Instagram</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🎯</div>
+            <div class="info-content">
+              <h3>Services proposés</h3>
+              <p>Design graphique · Développement web<br>UI/UX · Branding · BUT MMI</p>
+            </div>
+          </div>
+
+          <!-- CTA CV dans la colonne contact -->
+          <div style="margin-top:1.5rem;">
+            <a href="resume.html" class="btn-cv-cta" style="width:100%;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              Voir mon CV
+            </a>
+          </div>
+        </div>
+
+        <!-- Formulaire -->
+        <div class="contact-form-wrapper reveal">
+          <p class="form-title">Envoyez-moi un message</p>
+          <p class="form-subtitle">Tous les champs marqués <span style="color:var(--primary)">*</span> sont requis.</p>
+
+          <form id="contact-form" novalidate>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">Prénom <span class="required">*</span></label>
+                <input type="text" id="fname" name="fname" placeholder="Jean" required autocomplete="given-name">
+              </div>
+              <div class="form-group">
+                <label for="lname">Nom <span class="required">*</span></label>
+                <input type="text" id="lname" name="lname" placeholder="Dupont" required autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email <span class="required">*</span></label>
+              <input type="email" id="email" name="email" placeholder="jean@exemple.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Type de projet</label>
+              <select id="subject" name="subject">
+                <option value="" disabled selected>Sélectionnez une option</option>
+                <option value="Design graphique / Branding">Design graphique / Branding</option>
+                <option value="Développement web">Développement web</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="Collaboration">Collaboration</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message <span class="required">*</span></label>
+              <textarea id="message" name="message" placeholder="Décrivez votre projet, vos attentes…" required rows="5"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">⚓ Envoyer le message</button>
+
+            <div class="form-toast" id="form-toast"></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Widget Accessibilité -->
+  <div id="accessibility-widget" class="accessibility-widget">
+    <button id="accessibility-toggle" class="accessibility-toggle" aria-label="Accessibilité" title="Options d'accessibilité">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
+        <path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/>
+      </svg>
+    </button>
+    <div id="accessibility-panel" class="accessibility-panel hidden">
+      <h3 class="panel-title">Accessibilité</h3>
+      <button class="accessibility-option" onclick="toggleTheme()">
+        <span>🌓 Thème</span><span id="theme-label">Sombre</span>
+      </button>
+      <button class="accessibility-option" onclick="cycleFontSize()">
+        <span>🔤 Taille du texte</span><span id="font-size-label">Normal</span>
+      </button>
+      <button class="accessibility-option" onclick="toggleContrast()">
+        <span>⚡ Contraste élevé</span><span id="contrast-label">Désactivé</span>
+      </button>
+      <button class="accessibility-option" onclick="toggleLanguage()">
+        <span>🌍 Langue</span><span id="language-label">Français</span>
+      </button>
+    </div>
+  </div>
+
+  <button id="scroll-top-btn" aria-label="Retour en haut">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

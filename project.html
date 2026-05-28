@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets — Lévy CINQ-VAL</title>
+  <meta name="description" content="Découvrez les projets de design graphique et développement web de Lévy CINQ-VAL.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── PROJECTS DYNAMIC STYLES ─── */
+    .filters-section {
+      padding: 2rem 1rem 0;
+      display: flex;
+      justify-content: center;
+    }
+    .filters-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      max-width: 900px;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted-foreground);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+    .filter-btn:hover { color: var(--primary); border-color: var(--primary); }
+    .filter-btn.active {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+    .projects-section { padding: 2rem 1rem 5rem; }
+    .projects-count {
+      text-align: center;
+      color: var(--muted-foreground);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+    .projects-count span { color: var(--primary); font-weight: 600; }
+
+    /* ── Grid ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (min-width: 900px) {
+      .projects-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ── Card ── */
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease, border-color 0.25s;
+      opacity: 0;
+      transform: translateY(28px);
+      cursor: pointer;
+    }
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-card[data-hidden="true"] {
+      display: none;
+    }
+    .project-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 16px 48px rgba(0,217,255,0.12);
+      border-color: rgba(0,217,255,0.35);
+    }
+
+    /* ── Thumbnail ── */
+    .project-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: var(--secondary);
+      flex-shrink: 0;
+    }
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(.22,1,.36,1), filter 0.3s;
+      display: block;
+    }
+    .project-card:hover .project-thumb img {
+      transform: scale(1.06);
+      filter: brightness(0.75);
+    }
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .project-card:hover .thumb-overlay { opacity: 1; }
+    .thumb-overlay-btn {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      padding: 0.6rem 1.4rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transform: translateY(8px);
+      transition: transform 0.3s cubic-bezier(.22,1,.36,1);
+    }
+    .project-card:hover .thumb-overlay-btn { transform: translateY(0); }
+
+    /* PDF badge */
+    .pdf-badge {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      background: rgba(0,217,255,0.18);
+      border: 1px solid rgba(0,217,255,0.35);
+      color: var(--primary);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.35rem;
+    }
+
+    /* ── Body ── */
+    .project-body {
+      padding: 1.2rem 1.25rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0.5rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.6rem;
+      border-radius: 1rem;
+      background: rgba(0,217,255,0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0,217,255,0.2);
+    }
+    .project-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.35;
+      margin: 0.1rem 0;
+    }
+    .project-description {
+      font-size: 0.85rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+    .project-year { font-size: 0.8rem; color: var(--muted-foreground); }
+    .project-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { text-decoration: underline; }
+
+    /* ── Modal PDF Viewer ── */
+    .pdf-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .pdf-modal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 8, 18, 0.92);
+      backdrop-filter: blur(12px);
+    }
+    .modal-box {
+      position: relative;
+      z-index: 1;
+      width: 92vw;
+      max-width: 960px;
+      height: 88vh;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.94) translateY(20px);
+      transition: transform 0.4s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,217,255,0.08);
+    }
+    .pdf-modal.open .modal-box {
+      transform: scale(1) translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      gap: 1rem;
+    }
+    .modal-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--foreground);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .modal-actions { display: flex; gap: 0.5rem; align-items: center; flex-shrink: 0; }
+    .modal-btn {
+      padding: 0.4rem 0.9rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--foreground);
+      font-family: inherit;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .modal-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .modal-btn.close-btn {
+      background: rgba(239,68,68,0.1);
+      border-color: rgba(239,68,68,0.3);
+      color: #ef4444;
+    }
+    .modal-btn.close-btn:hover { background: rgba(239,68,68,0.2); }
+    .modal-iframe-wrap { flex: 1; overflow: hidden; }
+    .modal-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    /* Image viewer inside modal */
+    .modal-img-wrap {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: #080c18;
+    }
+    .modal-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 0.5rem;
+    }
+
+    /* ── Loading state ── */
+    .thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--secondary), var(--muted));
+    }
+    .thumb-placeholder-icon { font-size: 2.5rem; opacity: 0.6; }
+    .thumb-placeholder-label { font-size: 0.7rem; color: var(--muted-foreground); letter-spacing: 0.05em; }
+
+    /* ── No results ── */
+    #no-results {
+      text-align: center;
+      color: var(--muted-foreground);
+      padding: 4rem 0;
+      display: none;
+      font-size: 1rem;
+    }
+
+    /* ── CTA section ── */
+    .projects-cta {
+      padding: 5rem 1rem;
+      text-align: center;
+      background: rgba(15,20,32,0.3);
+    }
+    .cta-inner { max-width: 600px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .cta-inner p {
+      color: var(--muted-foreground);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    /* ── Stagger animation delays ── */
+    .project-card:nth-child(1) { transition-delay: 0.05s; }
+    .project-card:nth-child(2) { transition-delay: 0.1s; }
+    .project-card:nth-child(3) { transition-delay: 0.15s; }
+    .project-card:nth-child(4) { transition-delay: 0.2s; }
+    .project-card:nth-child(5) { transition-delay: 0.25s; }
+    .project-card:nth-child(6) { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header" class="header slide-down">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo-link">
+          <img src="images/Logo.png" alt="Logo" class="logo">
+          <span class="logo-text">Lévy CINQ-VAL</span>
+        </a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav">
+          <a href="index.html" class="nav-link">Accueil</a>
+          <a href="about.html" class="nav-link">À propos</a>
+          <a href="project.html" class="nav-link active">Projets</a>
+          <a href="resume.html" class="nav-link">CV</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="projects-hero">
+    <div class="container">
+      <div class="projects-hero-label fade-in-delay-1">🌊 Mes réalisations</div>
+      <h1 class="fade-in-delay-2">Des projets <span>forgés</span><br>dans les profondeurs</h1>
+      <p class="fade-in-delay-3">
+        Chaque projet est une traversée — un défi technique et créatif relevé avec
+        précision, robustesse et sensibilité maritime.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filtres -->
+  <section class="filters-section">
+    <div class="filters-wrapper reveal" id="filters-wrapper">
+      <!-- Généré dynamiquement -->
+    </div>
+  </section>
+
+  <!-- Grille Projets -->
+  <section class="projects-section">
+    <div class="container">
+      <p class="projects-count reveal">
+        <span id="count">0</span> projet(s) affiché(s)
+      </p>
+      <div class="projects-grid" id="projects-grid">
+        <!-- Généré dynamiquement par JS -->
+      </div>
+      <p id="no-results">Aucun projet dans cette catégorie pour l'instant.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="projects-cta">
+    <div class="cta-inner scale-in">
+      <h2>⟡ Un projet en tête ? ⟡</h2>
+      <p>
+        Je suis disponible pour de nouvelles collaborations. Discutons de votre prochain
+        défi créatif ou technique — chaque bonne idée mérite d'être construite.
+      </p>
+      <a href="contact.html" class="btn btn-primary">📧 Me contacter</a>
+    </div>
+  </section>
+
+  <!-- Modal PDF/Image Viewer -->
+  <div class="pdf-modal" id="pdf-modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">Chargement…</span>
+        <div class="modal-actions">
+          <a href="#" class="modal-btn" id="modal-download" download target="_blank">
+            ↓ Télécharger
+          </a>
+          <button class="modal-btn close-btn" id="modal-close">✕ Fermer</button>
+        </div>
+      </div>
+      <div id="modal-content-area">
+        <!-- iframe or img injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Widget d'Accessibilité -->
+  <div id="accessibility-widget" class="accessibility-widget">
+    <button id="accessibility-toggle" class="accessibility-toggle" aria-label="Accessibilité" title="Options d'accessibilité">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
+        <path d="M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/>
+      </svg>
+    </button>
+    <div id="accessibility-panel" class="accessibility-panel hidden">
+      <h3 class="panel-title">Accessibilité</h3>
+      <button class="accessibility-option" onclick="toggleTheme()">
+        <span>🌓 Thème</span><span id="theme-label">Sombre</span>
+      </button>
+      <button class="accessibility-option" onclick="cycleFontSize()">
+        <span>🔤 Taille du texte</span><span id="font-size-label">Normal</span>
+      </button>
+      <button class="accessibility-option" onclick="toggleContrast()">
+        <span>⚡ Contraste élevé</span><span id="contrast-label">Désactivé</span>
+      </button>
+      <button class="accessibility-option" onclick="toggleLanguage()">
+        <span>🌍 Langue</span><span id="language-label">Français</span>
+      </button>
+    </div>
+  </div>
+
+  <button id="scroll-top-btn" aria-label="Retour en haut">↑</button>
+  <script src="script.js"></script>
+  <script>
+  /* ═══════════════════════════════════════════════════════════════
+     DYNAMIC PROJECTS SYSTEM
+     Pour ajouter un projet : ajouter une entrée dans PROJECTS_DATA
+     et placer le fichier dans /projects/
+  ═══════════════════════════════════════════════════════════════ */
+
+  const PROJECTS_DATA = [
+    {
+      title: "Affiche de cinéma — The Fall Guy",
+      file: "projects/Affiche_cinema_The_Fall_Guy.pdf",
+      thumb: "images/thumbs/Affiche_cinema_The_Fall_Guy.jpg",
+      type: "pdf",
+      tags: ["Design", "Print", "Cinéma"],
+      category: "design print",
+      description: "Création d'une affiche de cinéma pour le film The Fall Guy. Travail sur la typographie, la composition et l'ambiance visuelle.",
+      year: "2025"
+    },
+    {
+      title: "Présentation — Affiche Film",
+      file: "projects/Presentation affiche film.pdf",
+      thumb: "images/thumbs/Presentation_affiche_film.jpg",
+      type: "pdf",
+      tags: ["Design", "Présentation", "Print"],
+      category: "design print",
+      description: "Dossier de présentation du processus créatif et des choix graphiques pour la création d'une affiche de film.",
+      year: "2025"
+    },
+    {
+      title: "Morpho — Charte Graphique",
+      file: "projects/Morpho_charte_graphique.pdf",
+      thumb: "images/thumbs/Morpho_charte_graphique_.jpg",
+      type: "pdf",
+      tags: ["Branding", "Charte", "Identité"],
+      category: "branding design",
+      description: "Conception complète d'une charte graphique pour la marque Morpho : couleurs, typographies, règles d'usage et déclinaisons.",
+      year: "2025"
+    },
+    {
+      title: "Charte Graphique",
+      file: "projects/Charte graphique.pdf",
+      thumb: "images/thumbs/Charte_graphique.jpg",
+      type: "pdf",
+      tags: ["Branding", "Charte", "Design"],
+      category: "branding design",
+      description: "Élaboration d'une charte graphique complète définissant l'identité visuelle d'une marque de bout en bout.",
+      year: "2024"
+    },
+    {
+      title: "Logo Karu",
+      file: "projects/Logo karu.png",
+      thumb: "images/thumbs/Logo_karu_thumb.jpg",
+      type: "image",
+      tags: ["Logo", "Branding", "Identité"],
+      category: "branding design",
+      description: "Création du logotype de la marque Karu : recherche typographique, iconographie et déclinaisons couleur.",
+      year: "2024"
+    },
+    {
+      title: "Illustration BlackaPink",
+      file: "projects/Illustration BlackaPink.png",
+      thumb: "images/thumbs/Illustration_BlackaPink_thumb.jpg",
+      type: "image",
+      tags: ["Illustration", "Digital", "Art"],
+      category: "illustration design",
+      description: "Illustration digitale inspirée de l'univers BlackaPink. Travail sur le style, la couleur et la composition.",
+      year: "2024"
+    },
+    {
+      title: "KaruApp — Site Web",
+      file: null,
+      liveUrl: "https://noahcassindabriou971-bot.github.io/Karuapp/",
+      thumb: null,
+      thumbPlaceholder: "🏝️",
+      type: "web",
+      tags: ["Web", "HTML/CSS", "JavaScript"],
+      category: "web design",
+      description: "Site web KaruApp — Développement d'une application web dédiée à la découverte de la Guadeloupe. Intégration HTML/CSS/JS, design responsive et expérience utilisateur fluide.",
+      year: "2025"
+    },
+    {
+      title: "Fishing Guide — Prototype Figma",
+      file: null,
+      liveUrl: "https://www.figma.com/make/bcLw8L9kH6nHc0AQepaSyh/Fishing-Guide-Website?code-node-id=0-9&p=f&t=7iIIBbLPtb72moPh-0&fullscreen=1",
+      thumb: null,
+      thumbPlaceholder: "🎣",
+      type: "web",
+      tags: ["Figma", "UI/UX", "Prototype"],
+      category: "web design uiux",
+      description: "Prototype Figma pour un site de guide de pêche. Conception UX complète : wireframes, maquettes haute fidélité, composants et design system.",
+      year: "2025"
+    },
+    {
+      title: "Présentation SAé — KARUapp",
+      file: "projects/Presentation_SAe_KARUapp.pdf",
+      thumb: null,
+      thumbPlaceholder: "📋",
+      type: "pdf",
+      tags: ["Présentation", "SAé", "BUT MMI"],
+      category: "design print",
+      description: "Dossier de présentation du projet SAé KARUapp réalisé dans le cadre du BUT MMI. Détail de la démarche de projet, conception et réalisation.",
+      year: "2025"
+    }
+  ];
+
+  /* ── Catégories disponibles ── */
+  const CATEGORIES = [
+    { key: "all",          label: "Tous les projets" },
+    { key: "web",          label: "Sites web" },
+    { key: "design",       label: "Design graphique" },
+    { key: "branding",     label: "Branding" },
+    { key: "print",        label: "Print" },
+    { key: "illustration", label: "Illustration" },
+    { key: "uiux",         label: "UI/UX" },
+  ];
+
+  /* ── Build filter buttons ── */
+  const filtersWrapper = document.getElementById('filters-wrapper');
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (cat.key === 'all' ? ' active' : '');
+    btn.dataset.filter = cat.key;
+    btn.textContent = cat.label;
+    filtersWrapper.appendChild(btn);
+  });
+
+  /* ── Build project cards ── */
+  const grid = document.getElementById('projects-grid');
+  const countEl = document.getElementById('count');
+  const noResults = document.getElementById('no-results');
+
+  function buildCards(projects) {
+    grid.innerHTML = '';
+    projects.forEach((proj, i) => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.dataset.category = proj.category;
+      card.dataset.file = proj.file;
+      card.dataset.type = proj.type;
+      card.dataset.title = proj.title;
+
+      const tagsHtml = proj.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
+
+      card.innerHTML = `
+        <div class="project-thumb">
+          <img src="${proj.thumb}" alt="${proj.title}" loading="lazy"
+               onerror="this.parentElement.innerHTML='<div class=\\'thumb-placeholder\\'><div class=\\'thumb-placeholder-icon\\'>📄</div><div class=\\'thumb-placeholder-label\\'>${proj.type.toUpperCase()}</div></div>'">
+          <span class="pdf-badge">${proj.type === 'pdf' ? 'PDF' : 'IMG'}</span>
+          <div class="thumb-overlay">
+            <div class="thumb-overlay-btn">Ouvrir →</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">${tagsHtml}</div>
+          <h2 class="project-title">${proj.title}</h2>
+          <p class="project-description">${proj.description}</p>
+          <div class="project-footer">
+            <span class="project-year">${proj.year}</span>
+            <span class="project-link">Voir le projet →</span>
+          </div>
+        </div>
+      `;
+
+      card.addEventListener('click', () => openModal(proj));
+      grid.appendChild(card);
+    });
+
+    countEl.textContent = projects.length;
+
+    // Scroll reveal with stagger
+    requestAnimationFrame(() => {
+      const cards = grid.querySelectorAll('.project-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, idx) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, idx * 60);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+      cards.forEach(c => observer.observe(c));
+    });
+  }
+
+  buildCards(PROJECTS_DATA);
+
+  /* ── Filter logic ── */
+  let activeFilter = 'all';
+
+  filtersWrapper.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    activeFilter = btn.dataset.filter;
+
+    filtersWrapper.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filtered = activeFilter === 'all'
+      ? PROJECTS_DATA
+      : PROJECTS_DATA.filter(p => p.category.includes(activeFilter));
+
+    buildCards(filtered);
+    noResults.style.display = filtered.length === 0 ? 'block' : 'none';
+  });
+
+  /* ─────────────────────────────────────────
+     MODAL PDF / IMAGE VIEWER
+  ───────────────────────────────────────── */
+  const modal = document.getElementById('pdf-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDownload = document.getElementById('modal-download');
+  const modalContentArea = document.getElementById('modal-content-area');
+  const modalClose = document.getElementById('modal-close');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+
+  function openModal(proj) {
+    modalTitle.textContent = proj.title;
+    modalDownload.href = proj.file;
+    modalDownload.download = proj.file.split('/').pop();
+
+    modalContentArea.innerHTML = '';
+
+    if (proj.type === 'pdf') {
+      modalContentArea.className = 'modal-iframe-wrap';
+      const iframe = document.createElement('iframe');
+      iframe.src = proj.file + '#toolbar=1&navpanes=0&scrollbar=1';
+      iframe.title = proj.title;
+      iframe.setAttribute('allowfullscreen', '');
+      modalContentArea.appendChild(iframe);
+    } else {
+      // Image viewer
+      modalContentArea.className = 'modal-img-wrap';
+      const img = document.createElement('img');
+      img.src = proj.file;
+      img.alt = proj.title;
+      modalContentArea.appendChild(img);
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { modalContentArea.innerHTML = ''; }, 400);
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+  </script>
+</body>
+</html>
